@@ -40,7 +40,7 @@ async def sort_folder(target_dir: AsyncPath):
     for file in files:
         if file.suffix:
             try:
-                shutil.move((target_dir / file), target_dir / file.suffix.upper())
+                shutil.move(file, target_dir / file.suffix.upper())
             except Exception as err:
                 logger.info(f'Raised exception: {err}')
 
@@ -64,10 +64,14 @@ async def folder_walk(target_folder_: AsyncPath):
 
 if __name__ == '__main__':
 
-    while True:
-        target_folder = input("insert trash folder path or type 'exit': ")
+    target_folder = 'trash'
 
-        if target_folder == 'exit':
-            break
-        else:
-            asyncio.run(folder_walk(AsyncPath(target_folder)))
+    asyncio.run(folder_walk(AsyncPath(target_folder)))
+
+    # while True:
+    #     target_folder = input("insert trash folder path or type 'exit': ")
+    #
+    #     if target_folder == 'exit':
+    #         break
+    #     else:
+    #         asyncio.run(folder_walk(AsyncPath(target_folder)))
