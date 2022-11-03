@@ -1,5 +1,5 @@
 import asyncio
-import shutil
+import aioshutil
 from aiopath import AsyncPath
 from typing import List
 import logging
@@ -40,7 +40,7 @@ async def sort_folder(target_dir: AsyncPath):
     for file in files:
         if file.suffix:
             try:
-                shutil.move(file, target_dir / file.suffix.upper())
+                await aioshutil.move(file, target_dir / file.suffix.upper())
             except Exception as err:
                 logger.info(f'Raised exception: {err}')
 
